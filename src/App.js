@@ -11,10 +11,7 @@ export default class App extends Component {
         {
           posts.map((post) => {
             return(
-              <Post key={post.id}
-                    id={post.id}
-                    name={post.name}
-                    description={post.description} />
+              <Post key={post.id} {...post} />
             );
           })
         }
