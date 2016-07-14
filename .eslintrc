@@ -5,12 +5,14 @@
   "parser": "babel-eslint",
   "env": {
     "browser": true,
-    "node": true
+    "node": true,
+    "es6": true
   },
   "plugins": [
     "react"
   ],
   "rules": {
-    "quotes": [2, "single"]
+    "quotes": [2, "single"],
+    "no-console": 0
   }
 }
