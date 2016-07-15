@@ -1,14 +1,18 @@
 import React, { Component } from 'react';
+import {Panel} from 'react-bootstrap';
 
 export default class Post extends Component {
   render() {
     return (
-      <li>
-        <span>#{this.props.id} </span>
-        <bold>{this.props.attributes.title}</bold>
-        <span>{this.props.attributes.username}</span>
-        <p>{this.props.attributes.body}</p>
-      </li>
+      <div>
+        <Panel>
+          <h4>{this.props.attributes.title}</h4>
+          <span>
+            <small>Автор: {this.props.attributes.username}</small>
+          </span>
+          <div>{this.props.attributes.body}</div>
+        </Panel>
+      </div>
     );
   }
 }

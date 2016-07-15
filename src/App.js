@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import PostList from './post-list';
 import PostForm from './post-form';
+import Navbar from './navbar';
 import {PostService} from './post-service';
+import {Col, Row} from 'react-bootstrap';
 
 export default class App extends Component {
   constructor(props) {
@@ -21,9 +23,14 @@ export default class App extends Component {
   render() {
 
     return (
-      <div>
-        <PostList posts={this.state.posts} />
-        <PostForm />
+      <div className="app">
+        <Navbar />
+        <Row>
+          <Col md={8} xsOffset={2}>
+            <PostList posts={this.state.posts} />
+            <PostForm />
+          </Col>
+        </Row>
       </div>
     );
   }
