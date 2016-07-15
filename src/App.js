@@ -1,20 +1,28 @@
 import React, { Component } from 'react';
-import Post from './post';
+import PostList from './post-list';
 import PostForm from './post-form';
-import {posts} from './post-store';
+import {PostService} from './post-service';
 
 export default class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { posts: [] };
+    this.postService = new PostService();
+
+  }
+
+  componentDidMount() {
+    this.postService.fetchAll()
+        .then((response) => {
+          this.setState({posts: response.data});
+        });
+  }
+
   render() {
 
     return (
       <div>
-        {
-          posts.map((post) => {
-            return(
-              <Post key={post.id} {...post} />
-            );
-          })
-        }
+        <PostList posts={this.state.posts} />
         <PostForm />
       </div>
     );
