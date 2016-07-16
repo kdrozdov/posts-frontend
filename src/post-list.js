@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
 import Post from './post';
-import PostForm from './post-form';
-import {posts} from './post-store';
 
-export default class App extends Component {
+export default class PostList extends Component {
   render() {
-
     return (
       <div>
         {
-          posts.map((post) => {
+          this.props.posts.map((post) => {
             return(
               <Post key={post.id} {...post} />
             );
           })
         }
-        <PostForm />
       </div>
     );
   }
 }
+
+PostList.propTypes = {
+  posts: React.PropTypes.array
+};
+

@@ -13,6 +13,7 @@
   ],
   "rules": {
     "quotes": [2, "single"],
+    "no-unused-vars": ["warn", { "vars": "local" }],
     "no-console": 0
   }
 }
