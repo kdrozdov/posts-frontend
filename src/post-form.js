@@ -10,6 +10,10 @@ export default class PostForm extends Component {
       body: '',
       username: ''
     };
+    this.handleTitleChange = this.handleTitleChange.bind(this);
+    this.handleBodyChange = this.handleBodyChange.bind(this);
+    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleTitleChange(e) {
@@ -37,7 +41,7 @@ export default class PostForm extends Component {
   render() {
     return (
       <Panel header="Добавить новость">
-        <Form horizontal onSubmit={this.handleSubmit.bind(this)}>
+        <Form horizontal onSubmit={this.handleSubmit}>
           <FormGroup controlId="postFormTitle">
             <Col componentClass={ControlLabel} sm={2}>
               Заголовок
@@ -46,7 +50,7 @@ export default class PostForm extends Component {
               <FormControl type="text"
                            value={this.state.title}
                            placeholder="Введите заголовок новости"
-                           onChange={(e) => this.handleTitleChange(e)}/>
+                           onChange={this.handleTitleChange}/>
               <FormControl.Feedback />
             </Col>
           </FormGroup>
@@ -60,7 +64,7 @@ export default class PostForm extends Component {
                            type="text"
                            value={this.state.body}
                            placeholder="Содержание новости"
-                           onChange={(e) => this.handleBodyChange(e)}/>
+                           onChange={this.handleBodyChange}/>
               <FormControl.Feedback />
             </Col>
           </FormGroup>
@@ -73,7 +77,7 @@ export default class PostForm extends Component {
               <FormControl type="text"
                            value={this.state.username}
                            placeholder="Автор"
-                           onChange={(e) => this.handleUsernameChange(e)}/>
+                           onChange={this.handleUsernameChange}/>
               <FormControl.Feedback />
             </Col>
           </FormGroup>

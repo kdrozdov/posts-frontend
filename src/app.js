@@ -10,6 +10,7 @@ export default class App extends Component {
     super(props);
     this.state = { posts: [] };
     this.postService = new PostService();
+    this.handlePostSubmit = this.handlePostSubmit.bind(this);
   }
 
   componentDidMount() {
@@ -35,8 +36,7 @@ export default class App extends Component {
         <Row>
           <Col md={8} xsOffset={2}>
             <PostList posts={this.state.posts} />
-            <PostForm
-              onPostSubmit={(params) => this.handlePostSubmit(params)} />
+            <PostForm onPostSubmit={this.handlePostSubmit} />
           </Col>
         </Row>
       </div>
