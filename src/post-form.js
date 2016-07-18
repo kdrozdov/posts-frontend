@@ -8,7 +8,7 @@ export default class PostForm extends Component {
     this.state = {
       title: '',
       body: '',
-      username: ''
+      user_attributes: { name: '' }
     };
     this.handleTitleChange = this.handleTitleChange.bind(this);
     this.handleBodyChange = this.handleBodyChange.bind(this);
@@ -25,7 +25,7 @@ export default class PostForm extends Component {
   }
 
   handleUsernameChange(e) {
-    this.setState({ username: e.target.value });
+    this.setState({ user_attributes: { name: e.target.value }});
   }
 
   handleSubmit(e) {
@@ -34,8 +34,12 @@ export default class PostForm extends Component {
     if (!title) {
       return;
     }
-    this.props.onPostSubmit(this.state);
-    this.setState({title: '', body: '', username: ''});
+    this.props.onPostSubmit({ post: this.state });
+    this.setState({
+      title: '',
+      body: '',
+      user_attributes: { name: '' }
+    });
   }
 
   render() {
@@ -75,7 +79,7 @@ export default class PostForm extends Component {
             </Col>
             <Col sm={10}>
               <FormControl type="text"
-                           value={this.state.username}
+                           value={this.state.user_attributes.name}
                            placeholder="Автор"
                            onChange={this.handleUsernameChange}/>
               <FormControl.Feedback />

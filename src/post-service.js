@@ -1,16 +1,15 @@
 import 'whatwg-fetch';
-import {baseUrl} from './config/fetch';
 
 export class PostService {
   fetchAll() {
-    return fetch(`${baseUrl}/posts`)
+    return fetch(`${process.env.BASE_URL}/posts`)
       .then((response) => {
         return response.json();
       })
   }
 
   create(params) {
-    return fetch(`${baseUrl}/posts`, {
+    return fetch(`${process.env.BASE_URL}/posts`, {
       method: 'POST',
       headers: {
         'Accept': 'application/json',
