@@ -10,10 +10,10 @@ branches:
 deploy:
   provider: s3
   skip_cleanup: true
-  access_key_id: ACCESS_ID
+  access_key_id: $ACCESS_ID
   secret_access_key:
-    secure: ACCESS_SECRET
-  bucket: BUCKET
+    secure: $ACCESS_SECRET
+  bucket: $BUCKET
   local-dir: build
   acl: public_read
   region: eu-central-1
