@@ -5,7 +5,6 @@ var path = require('path');
 module.exports = {
   entry: [
     'babel-polyfill',
-    'webpack-hot-middleware/client',
     './src/index.js'
   ],
   output: {
@@ -14,12 +13,18 @@ module.exports = {
     filename: 'bundle.js'
   },
   plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      compress: { warnings: false }
+    }),
+    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
-    new webpack.NoErrorsPlugin(),
+    new CopyWebpackPlugin([
+      { from: 'public/index.html', to: '../index.html' }
+    ]),
     new webpack.DefinePlugin({
       'process.env': {
-        BASE_URL: JSON.stringify('http://lvh.me:3000/api')
+          NODE_ENV: JSON.stringify('production'),
+          BASE_URL: JSON.stringify(process.env.BASE_URL)
       },
     })
   ],
