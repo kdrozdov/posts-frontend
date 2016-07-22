@@ -1,18 +1,14 @@
-import React from 'react'
+import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
-import { addPost } from '../actions/PostActions'
-import { Panel, Button } from 'react-bootstrap';
+import TestButton from '../components/TestButton'
+import * as PostActions from '../actions/PostActions'
 
-let TestButton = ({ dispatch }) => {
-  return(
-    <Panel header="Redux test">
-      <Button onClick={ e => dispatch(addPost()) }
-              bsStyle="primary">
-        Тест
-      </Button>
-    </Panel>
-  )
+const mapStateToProps = (state) => {
+  return state
 }
 
-TestButton = connect()(TestButton)
-export default TestButton
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(PostActions, dispatch)
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TestButton)
