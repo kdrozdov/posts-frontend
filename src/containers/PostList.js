@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import PostList from '../components/PostList'
 import * as PostActions from '../actions/PostActions'
 
-
 const mapStateToProps = (state) => {
   return state.posts
 }

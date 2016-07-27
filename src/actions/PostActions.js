@@ -45,12 +45,8 @@ export function addPostSuccess(post) {
   }
 }
 
-export function addPost() {
-  return function (dispatch, getState) {
-    let params = getState().postForm;
-    if (!params.title) {
-      return;
-    }
+export function addPost(params) {
+  return function (dispatch) {
     dispatch(addPostRequest(params))
     return fetch(`${process.env.BASE_URL}/posts`, {
       method: 'POST',

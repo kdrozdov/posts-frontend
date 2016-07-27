@@ -1,36 +1,51 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import {Form, Col, FormGroup, ControlLabel, FormControl, Panel, Button}
   from 'react-bootstrap';
 
 export default class PostForm extends Component {
   constructor(props) {
     super(props);
-    this.handleTitleChange = this.handleTitleChange.bind(this);
-    this.handleBodyChange = this.handleBodyChange.bind(this);
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    this.formData = this.formData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.getValue = this.getValue.bind(this);
   }
 
-  handleTitleChange(e) {
-    this.props.update('title', e.target.value);
+  getValue(formControl) {
+    return ReactDOM.findDOMNode(formControl).value;
   }
 
-  handleBodyChange(e) {
-    this.props.update('body', e.target.value);
+  setValue(formControl, value) {
+    ReactDOM.findDOMNode(formControl).value = value;
   }
 
-  handleUsernameChange(e) {
-    this.props.update('user_attributes', { name: e.target.value });
+  reset(formControl) {
+    this.setValue(this.refs.title, '')
+    this.setValue(this.refs.body, '')
+    this.setValue(this.refs.userName, '')
+  }
+
+  formData(){
+    return {
+      title: this.getValue(this.refs.title),
+      body: this.getValue(this.refs.body),
+      user_attributes: {
+        name: this.getValue(this.refs.userName)
+      }
+    }
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    this.props.addPost()
-      .then(() => this.props.reset());
+    let params = this.formData();
+    if (!params.title) {
+      return;
+    }
+    this.props.addPost(params)
+      .then(() => this.reset());
   }
 
   render() {
-    console.log('props', this.props);
     return (
       <Panel header="Добавить новость">
         <Form horizontal onSubmit={this.handleSubmit}>
@@ -39,10 +54,9 @@ export default class PostForm extends Component {
               Заголовок
             </Col>
             <Col sm={10}>
-              <FormControl type="text"
-                           value={this.props.title}
-                           placeholder="Введите заголовок новости"
-                           onChange={this.handleTitleChange}/>
+              <FormControl ref="title"
+                           type="text"
+                           placeholder="Введите заголовок новости" />
               <FormControl.Feedback />
             </Col>
           </FormGroup>
@@ -52,11 +66,10 @@ export default class PostForm extends Component {
               Содержание
             </Col>
             <Col sm={10}>
-              <FormControl componentClass="textarea"
+              <FormControl ref="body"
+                           componentClass="textarea"
                            type="text"
-                           value={this.props.body}
-                           placeholder="Содержание новости"
-                           onChange={this.handleBodyChange}/>
+                           placeholder="Содержание новости" />
               <FormControl.Feedback />
             </Col>
           </FormGroup>
@@ -66,10 +79,9 @@ export default class PostForm extends Component {
               Автор
             </Col>
             <Col sm={10}>
-              <FormControl type="text"
-                           value={this.props.user_attributes.name}
-                           placeholder="Автор"
-                           onChange={this.handleUsernameChange}/>
+              <FormControl ref="userName"
+                           type="text"
+                           placeholder="Автор" />
               <FormControl.Feedback />
             </Col>
           </FormGroup>
