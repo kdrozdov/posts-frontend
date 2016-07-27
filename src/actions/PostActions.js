@@ -1,10 +1,10 @@
-export const SET_POSTS = 'SET_POSTS'
+export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const ADD_POST = 'ADD_POST'
 export const REMOVE_POST = 'REMOVE_POST'
 
-export function setPosts(posts) {
+export function receivePosts(posts) {
   return {
-    type: SET_POSTS,
+    type: RECEIVE_POSTS,
     posts
   }
 }
@@ -14,7 +14,7 @@ export function fetchPosts() {
     return fetch(`${process.env.BASE_URL}/posts`)
       .then(response => response.json())
       .then(json =>
-        dispatch(setPosts(json.data))
+        dispatch(receivePosts(json.data))
       )
   }
 }

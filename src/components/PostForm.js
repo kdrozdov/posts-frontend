@@ -54,9 +54,7 @@ export default class PostForm extends Component {
               Заголовок
             </Col>
             <Col sm={10}>
-              <FormControl ref="title"
-                           type="text"
-                           placeholder="Введите заголовок новости" />
+              <FormControl ref="title" type="text" placeholder="Введите заголовок новости" />
               <FormControl.Feedback />
             </Col>
           </FormGroup>
@@ -66,10 +64,7 @@ export default class PostForm extends Component {
               Содержание
             </Col>
             <Col sm={10}>
-              <FormControl ref="body"
-                           componentClass="textarea"
-                           type="text"
-                           placeholder="Содержание новости" />
+              <FormControl ref="body" componentClass="textarea" type="text" placeholder="Содержание новости" />
               <FormControl.Feedback />
             </Col>
           </FormGroup>
@@ -79,9 +74,7 @@ export default class PostForm extends Component {
               Автор
             </Col>
             <Col sm={10}>
-              <FormControl ref="userName"
-                           type="text"
-                           placeholder="Автор" />
+              <FormControl ref="userName" type="text" placeholder="Автор" />
               <FormControl.Feedback />
             </Col>
           </FormGroup>
