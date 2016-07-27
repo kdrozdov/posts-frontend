@@ -1,13 +1,11 @@
-import Bootstrap from 'bootstrap/dist/css/bootstrap.css';
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
-import { createStore } from 'redux';
+import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { Provider } from 'react-redux'
+import App from './components/App'
+import configureStore from './store'
 
-import rootReducer from './reducers'
-import App from './app';
-
-let store = createStore(rootReducer)
+const store = configureStore()
 
 ReactDOM.render(
   <Provider store={store}>
