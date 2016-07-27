@@ -8,13 +8,13 @@ export default class PostList extends Component {
   }
 
   componentDidMount() {
-    this.props.getPosts();
+    this.props.fetchPosts();
   }
 
   showPost(post) {
-    const { removePost } = this.props;
+    const { destroyPost } = this.props;
     return(
-      <Post key={post.id} {...post} removePost={removePost} />
+      <Post key={post.id} {...post} destroyPost={destroyPost} />
     );
   }
 

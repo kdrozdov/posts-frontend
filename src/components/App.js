@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import {Col, Row} from 'react-bootstrap';
-import PostForm from './containers/PostForm';
-import Navbar from './components/Navbar';
-import PostList from './containers/PostList';
+import Navbar from './Navbar';
+import PostForm from '../containers/PostForm';
+import PostList from '../containers/PostList';
 
 export default class App extends Component {
   render() {

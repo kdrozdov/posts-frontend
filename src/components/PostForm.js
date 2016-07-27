@@ -19,7 +19,7 @@ export default class PostForm extends Component {
     ReactDOM.findDOMNode(formControl).value = value;
   }
 
-  reset(formControl) {
+  reset() {
     this.setValue(this.refs.title, '')
     this.setValue(this.refs.body, '')
     this.setValue(this.refs.userName, '')
@@ -41,7 +41,7 @@ export default class PostForm extends Component {
     if (!params.title) {
       return;
     }
-    this.props.addPost(params)
+    this.props.createPost(params)
       .then(() => this.reset());
   }
 

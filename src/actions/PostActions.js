@@ -1,53 +1,33 @@
-export const GET_POSTS_REQUEST = 'GET_POSTS_REQUEST'
-export const GET_POSTS_SUCCESS = 'GET_POSTS_SUCCESS'
+export const SET_POSTS = 'SET_POSTS'
+export const ADD_POST = 'ADD_POST'
+export const REMOVE_POST = 'REMOVE_POST'
 
-export const ADD_POST_REQUEST = 'ADD_POST_REQUEST'
-export const ADD_POST_SUCCESS = 'ADD_POST_SUCCESS'
-
-export const REMOVE_POST_REQUEST = 'REMOVE_POST_REQUEST'
-export const REMOVE_POST_SUCCESS = 'REMOVE_POST_SUCCESS'
-
-export function getPostsRequest() {
+export function setPosts(posts) {
   return {
-    type: GET_POSTS_REQUEST
-  }
-}
-
-export function getPostsSuccess(posts) {
-  return {
-    type: GET_POSTS_SUCCESS,
+    type: SET_POSTS,
     posts
   }
 }
 
-export function getPosts() {
+export function fetchPosts() {
   return function (dispatch) {
-    dispatch(getPostsRequest())
     return fetch(`${process.env.BASE_URL}/posts`)
       .then(response => response.json())
       .then(json =>
-        dispatch(getPostsSuccess(json.data))
+        dispatch(setPosts(json.data))
       )
   }
 }
 
-export function addPostRequest(params) {
+export function addPost(post) {
   return {
-    type: ADD_POST_REQUEST,
-    params
-  }
-}
-
-export function addPostSuccess(post) {
-  return {
-    type: ADD_POST_SUCCESS,
+    type: ADD_POST,
     post
   }
 }
 
-export function addPost(params) {
+export function createPost(params) {
   return function (dispatch) {
-    dispatch(addPostRequest(params))
     return fetch(`${process.env.BASE_URL}/posts`, {
       method: 'POST',
       headers: {
@@ -58,28 +38,20 @@ export function addPost(params) {
     })
     .then(response => response.json())
     .then(json =>
-      dispatch(addPostSuccess(json.data))
+      dispatch(addPost(json.data))
     )
   }
 }
 
-export function removePostRequest(postId) {
-  return {
-    type: REMOVE_POST_REQUEST,
-    postId
-  }
-}
-
-export function removePostSuccess(postId) {
-  return {
-    type: REMOVE_POST_SUCCESS,
-    postId
-  }
-}
-
 export function removePost(postId) {
+  return {
+    type: REMOVE_POST,
+    postId
+  }
+}
+
+export function destroyPost(postId) {
   return function (dispatch) {
-    dispatch(removePostRequest(postId))
     return fetch(`${process.env.BASE_URL}/posts/${postId}`, {
       headers: {
         'Accept': 'application/json',
@@ -88,7 +60,7 @@ export function removePost(postId) {
       method: 'DELETE'
     })
     .then(() =>
-      dispatch(removePostSuccess(postId))
+      dispatch(removePost(postId))
     )
   }
 }

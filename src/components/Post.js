@@ -8,7 +8,7 @@ export default class Post extends Component {
   }
 
   handleRemoveClick() {
-    this.props.removePost(this.props.id);
+    this.props.destroyPost(this.props.id);
   }
 
   render() {
