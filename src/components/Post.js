@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Panel, Row, Col, Button} from 'react-bootstrap';
 
 export default class Post extends Component {
   constructor(props) {
@@ -13,22 +12,21 @@ export default class Post extends Component {
 
   render() {
     return (
-      <div>
-        <Panel>
-          <Row>
-            <Col md={10}>
+      <div className="panel panel-default">
+        <div className="panel-body">
+          <div className="row">
+            <div className="col-md-10">
               <h4>{this.props.attributes.title}</h4>
               <span>
                 <small>Автор: {this.props.attributes.username}</small>
               </span>
               <div>{this.props.attributes.body}</div>
-            </Col>
-            <Col md={2}>
-              <Button onClick={this.handleRemoveClick}
-                      bsStyle="danger">Удалить</Button>
-            </Col>
-          </Row>
-        </Panel>
+            </div>
+            <div className="col-md-2">
+              <button className="btn btn-danger" onClick={this.handleRemoveClick} >Удалить</button>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

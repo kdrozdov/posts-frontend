@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import {Col, Row} from 'react-bootstrap';
 import Navbar from './Navbar';
 import PostForm from '../containers/PostForm';
 import PostList from '../containers/PostList';
@@ -9,12 +8,12 @@ export default class App extends Component {
     return (
       <div className="app">
         <Navbar />
-        <Row>
-          <Col md={8} xsOffset={2}>
+        <div className="row">
+          <div className="col-md-8 col-md-offset-2">
             <PostList />
             <PostForm />
-          </Col>
-        </Row>
+          </div>
+        </div>
       </div>
     );
   }

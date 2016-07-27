@@ -1,36 +1,24 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import {Form, Col, FormGroup, ControlLabel, FormControl, Panel, Button}
-  from 'react-bootstrap';
 
 export default class PostForm extends Component {
   constructor(props) {
     super(props);
     this.formData = this.formData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.getValue = this.getValue.bind(this);
   }
 
-  getValue(formControl) {
-    return ReactDOM.findDOMNode(formControl).value;
-  }
-
-  setValue(formControl, value) {
-    ReactDOM.findDOMNode(formControl).value = value;
-  }
-
-  reset() {
-    this.setValue(this.refs.title, '')
-    this.setValue(this.refs.body, '')
-    this.setValue(this.refs.userName, '')
+  resetForm() {
+    this.refs.title.value = ''
+    this.refs.body.value = ''
+    this.refs.userName.value = ''
   }
 
   formData(){
     return {
-      title: this.getValue(this.refs.title),
-      body: this.getValue(this.refs.body),
+      title: this.refs.title.value,
+      body: this.refs.body.value,
       user_attributes: {
-        name: this.getValue(this.refs.userName)
+        name: this.refs.userName.value
       }
     }
   }
@@ -42,49 +30,41 @@ export default class PostForm extends Component {
       return;
     }
     this.props.createPost(params)
-      .then(() => this.reset());
+      .then(() => this.resetForm());
   }
 
   render() {
+
     return (
-      <Panel header="Добавить новость">
-        <Form horizontal onSubmit={this.handleSubmit}>
-          <FormGroup controlId="postFormTitle">
-            <Col componentClass={ControlLabel} sm={2}>
-              Заголовок
-            </Col>
-            <Col sm={10}>
-              <FormControl ref="title" type="text" placeholder="Введите заголовок новости" />
-              <FormControl.Feedback />
-            </Col>
-          </FormGroup>
+      <div className="panel panel-default">
+        <div className="panel-heading">Добавить новость</div>
+        <div className="panel-body">
+          <form onSubmit={this.handleSubmit} className="form-horizontal" role="form">
 
-          <FormGroup controlId="postFormBody">
-            <Col componentClass={ControlLabel} sm={2}>
-              Содержание
-            </Col>
-            <Col sm={10}>
-              <FormControl ref="body" componentClass="textarea" type="text" placeholder="Содержание новости" />
-              <FormControl.Feedback />
-            </Col>
-          </FormGroup>
+            <div className="form-group">
+              <label className="col-sm-2 control-label">Заголовок</label>
+              <div className="col-sm-10">
+                <input ref="title" type="text" className="form-control" placeholder="Введите заголовок новости" />
+              </div>
+            </div>
 
-          <FormGroup controlId="postFormUsername">
-            <Col componentClass={ControlLabel} sm={2}>
-              Автор
-            </Col>
-            <Col sm={10}>
-              <FormControl ref="userName" type="text" placeholder="Автор" />
-              <FormControl.Feedback />
-            </Col>
-          </FormGroup>
+            <div className="form-group">
+              <label className="col-sm-2 control-label">Содержание</label>
+              <div className="col-sm-10">
+                <textarea ref="body" className="form-control" rows="3" placeholder="Содержание новости"></textarea>
+              </div>
+            </div>
 
-          <Button type="submit"
-                  bsStyle="primary">
-            Сохранить
-          </Button>
-        </Form>
-      </Panel>
+            <div className="form-group">
+              <label className="col-sm-2 control-label">Автор</label>
+              <div className="col-sm-10">
+                <input ref="userName" type="text" className="form-control" placeholder="Автор" />
+              </div>
+            </div>
+            <button className="btn btn-primary" type="submit"> Сохранить </button>
+          </form>
+        </div>
+      </div>
     );
   }
 }

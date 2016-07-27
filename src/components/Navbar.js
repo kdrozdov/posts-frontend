@@ -1,20 +1,20 @@
 import React, { Component } from 'react';
-import {Navbar as BSNavbar} from 'react-bootstrap';
 
 export default class Navbar extends Component {
   render() {
     return (
-      <div className="navbar">
-        <BSNavbar inverse>
-          <BSNavbar.Header>
-            <BSNavbar.Brand>
-              <a href="#">Posts</a>
-            </BSNavbar.Brand>
-            <BSNavbar.Toggle />
-          </BSNavbar.Header>
-          <BSNavbar.Collapse>
-          </BSNavbar.Collapse>
-        </BSNavbar>
+      <div className="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div className="container">
+          <div className="navbar-header">
+            <button type="button" className="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+              <span className="sr-only">Toggle navigation</span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+              <span className="icon-bar"></span>
+            </button>
+            <a className="navbar-brand" href="#">Posts</a>
+          </div>
+        </div>
       </div>
     );
   }

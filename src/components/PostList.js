@@ -19,9 +19,11 @@ export default class PostList extends Component {
   }
 
   render() {
-    console.log(this.props)
+    let listStyles = {
+      marginTop: '80px'
+    }
     return (
-      <div>
+      <div style={listStyles}>
         { this.props.posts.map(this.showPost) }
       </div>
     );
