@@ -4,6 +4,7 @@ import PostForm from './post-form';
 import Navbar from './navbar';
 import {PostService} from './post-service';
 import {Col, Row} from 'react-bootstrap';
+import TestButton from './containers/TestButton';
 
 export default class App extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ export default class App extends Component {
           <Col md={8} xsOffset={2}>
             <PostList posts={this.state.posts} />
             <PostForm onPostSubmit={this.handlePostSubmit} />
+            <TestButton />
           </Col>
         </Row>
       </div>
