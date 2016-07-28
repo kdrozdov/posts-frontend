@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router';
 
 export default class PostItem extends Component {
   constructor(props) {
@@ -16,7 +17,9 @@ export default class PostItem extends Component {
         <div className="panel-body">
           <div className="row">
             <div className="col-md-10">
-              <h4>{this.props.attributes.title}</h4>
+              <Link to={'/posts/' + this.props.id}>
+                <h4>{this.props.attributes.title}</h4>
+              </Link>
               <span>
                 <small>Автор: {this.props.attributes.username}</small>
               </span>

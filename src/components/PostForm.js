@@ -26,11 +26,11 @@ export default class PostForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let params = this.formData();
-    if (!params.title) {
+    if (!params.title.trim() ||
+        !params.body.trim() ||
+        !params.user_attributes.name.trim()) {
       return;
     }
-    console.log(this.props.createPost);
-    console.log(params);
     this.props.createPost(params)
       .then(() => this.resetForm());
   }

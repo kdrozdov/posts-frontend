@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import Layout from './components/Layout'
 import NotFound from './components/NotFound'
 import PostList from './containers/PostList'
+import Post from './containers/Post'
 import configureStore from './store'
 
 const store = configureStore()
@@ -14,7 +15,11 @@ ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <Route path="/" component={Layout}>
-        <IndexRoute component={PostList} />
+        <IndexRoute component={PostList}/>
+        <Route path="posts">
+          <IndexRoute component={PostList}/>
+          <Route path=":id" component={Post}/>
+        </Route>
         <Route path="*" component={NotFound}/>
       </Route>
     </Router>
