@@ -29,6 +29,8 @@ export default class PostForm extends Component {
     if (!params.title) {
       return;
     }
+    console.log(this.props.createPost);
+    console.log(params);
     this.props.createPost(params)
       .then(() => this.resetForm());
   }

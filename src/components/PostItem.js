@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class Post extends Component {
+export default class PostItem extends Component {
   constructor(props) {
     super(props);
     this.handleRemoveClick = this.handleRemoveClick.bind(this);
@@ -32,7 +32,7 @@ export default class Post extends Component {
   }
 }
 
-Post.propTypes = {
+PostItem.propTypes = {
   id: React.PropTypes.string.isRequired,
   attributes: React.PropTypes.shape({
     username: React.PropTypes.string.isRequired,

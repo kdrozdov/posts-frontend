@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import Post from './Post';
+import PostItem from './PostItem';
+import PostForm from './PostForm'
 
 export default class PostList extends Component {
   constructor(props) {
@@ -14,17 +15,15 @@ export default class PostList extends Component {
   showPost(post) {
     const { destroyPost } = this.props;
     return(
-      <Post key={post.id} {...post} destroyPost={destroyPost} />
+      <PostItem key={post.id} {...post} destroyPost={destroyPost} />
     );
   }
 
   render() {
-    let listStyles = {
-      marginTop: '80px'
-    }
     return (
-      <div style={listStyles}>
+      <div>
         { this.props.posts.map(this.showPost) }
+        <PostForm createPost={this.props.createPost} />
       </div>
     );
   }
