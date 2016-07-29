@@ -26,7 +26,9 @@ export default class PostForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     let params = this.formData();
-    if (!params.title) {
+    if (!params.title.trim() ||
+        !params.body.trim() ||
+        !params.user_attributes.name.trim()) {
       return;
     }
     this.props.createPost(params)

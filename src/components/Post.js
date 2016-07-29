@@ -1,42 +1,40 @@
 import React, { Component } from 'react';
+import {Link, browserHistory} from 'react-router';
 
 export default class Post extends Component {
   constructor(props) {
     super(props);
-    this.handleRemoveClick = this.handleRemoveClick.bind(this);
   }
 
-  handleRemoveClick() {
-    this.props.destroyPost(this.props.id);
+  componentDidMount() {
+    let id = this.props.params.id;
+    this.props.fetchPost(id);
   }
 
   render() {
     return (
-      <div className="panel panel-default">
-        <div className="panel-body">
-          <div className="row">
-            <div className="col-md-10">
-              <h4>{this.props.attributes.title}</h4>
-              <span>
-                <small>Автор: {this.props.attributes.username}</small>
-              </span>
-              <div>{this.props.attributes.body}</div>
-            </div>
-            <div className="col-md-2">
-              <button className="btn btn-danger" onClick={this.handleRemoveClick} >Удалить</button>
+      <div>
+        <div className="panel panel-default">
+          <div className="panel-body">
+            <div className="row">
+              <div className="col-md-10">
+                <h4>{this.props.title}</h4>
+                <span>
+                  <small>Автор: {this.props.username}</small>
+                </span>
+                <div>{this.props.body}</div>
+              </div>
             </div>
           </div>
         </div>
+
+        <div className="row" style={{marginBottom: '15px'}}>
+          <div className="col-md-12">
+            <a onClick={browserHistory.goBack} className="btn btn-primary">Назад</a>
+          </div>
+        </div>
       </div>
+
     );
   }
 }
-
-Post.propTypes = {
-  id: React.PropTypes.string.isRequired,
-  attributes: React.PropTypes.shape({
-    username: React.PropTypes.string.isRequired,
-    title: React.PropTypes.string.isRequired,
-    body: React.PropTypes.string
-  })
-};

@@ -1,4 +1,5 @@
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+export const RECEIVE_POST = 'RECEIVE_POST'
 export const ADD_POST = 'ADD_POST'
 export const REMOVE_POST = 'REMOVE_POST'
 
@@ -16,6 +17,23 @@ export function fetchPosts() {
       .then(json =>
         dispatch(receivePosts(json.data))
       )
+  }
+}
+
+export function receivePost(post) {
+  return {
+    type: RECEIVE_POST,
+    post
+  }
+}
+
+export function fetchPost(postId) {
+  return function (dispatch) {
+    return fetch(`${process.env.BASE_URL}/posts/${postId}`)
+    .then(response => response.json())
+    .then(json =>
+      dispatch(receivePost(json.data.attributes))
+    )
   }
 }
 
