@@ -4,7 +4,6 @@ import PostList from '../components/PostList'
 import * as PostActions from '../actions/PostActions'
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return state.posts
 }
 

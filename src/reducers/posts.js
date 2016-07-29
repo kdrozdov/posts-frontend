@@ -13,7 +13,6 @@ const posts = (state = initialState, action) => {
       return Object.assign({}, state, { posts: action.posts });
     }
     case 'RECEIVE_POST': {
-      console.log(Object.assign({}, state, { post: action.post }))
       return Object.assign({}, state, { post: action.post });
     }
     case 'ADD_POST': {

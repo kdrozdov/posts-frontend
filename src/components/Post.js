@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router';
+import {Link, browserHistory} from 'react-router';
 
 export default class Post extends Component {
   constructor(props) {
@@ -8,7 +8,6 @@ export default class Post extends Component {
 
   componentDidMount() {
     let id = this.props.params.id;
-    console.log(this.props);
     this.props.fetchPost(id);
   }
 
@@ -31,7 +30,7 @@ export default class Post extends Component {
 
         <div className="row" style={{marginBottom: '15px'}}>
           <div className="col-md-12">
-            <Link to="/" className="btn btn-primary">Назад</Link>
+            <a onClick={browserHistory.goBack} className="btn btn-primary">Назад</a>
           </div>
         </div>
       </div>
