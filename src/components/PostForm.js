@@ -10,16 +10,13 @@ export default class PostForm extends Component {
   resetForm() {
     this.refs.title.value = ''
     this.refs.body.value = ''
-    this.refs.userName.value = ''
   }
 
   formData(){
     return {
       title: this.refs.title.value,
       body: this.refs.body.value,
-      user_attributes: {
-        name: this.refs.userName.value
-      }
+      user_id: this.props.user_id
     }
   }
 
@@ -27,8 +24,7 @@ export default class PostForm extends Component {
     e.preventDefault();
     let params = this.formData();
     if (!params.title.trim() ||
-        !params.body.trim() ||
-        !params.user_attributes.name.trim()) {
+        !params.body.trim()) {
       return;
     }
     this.props.createPost(params)
@@ -57,12 +53,6 @@ export default class PostForm extends Component {
               </div>
             </div>
 
-            <div className="form-group">
-              <label className="col-sm-2 control-label">Автор</label>
-              <div className="col-sm-10">
-                <input ref="userName" type="text" className="form-control" placeholder="Автор" />
-              </div>
-            </div>
             <button className="btn btn-primary" type="submit"> Сохранить </button>
           </form>
         </div>
