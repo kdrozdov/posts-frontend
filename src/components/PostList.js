@@ -15,7 +15,7 @@ export default class PostList extends Component {
   showPost(post) {
     const { destroyPost } = this.props;
     return(
-      <PostItem key={post.id} {...post} destroyPost={destroyPost} />
+      <PostItem key={post.id} {...post} isAuthenticated={this.props.isAuthenticated} destroyPost={destroyPost} />
     );
   }
 
@@ -23,7 +23,10 @@ export default class PostList extends Component {
     return (
       <div>
         { this.props.posts.map(this.showPost) }
-        <PostForm createPost={this.props.createPost} />
+        { this.props.isAuthenticated
+          ?  <PostForm id={this.props.user_id} createPost={this.props.createPost} />
+          : ''
+        }
       </div>
     );
   }

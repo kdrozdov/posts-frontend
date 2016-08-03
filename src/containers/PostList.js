@@ -4,7 +4,11 @@ import PostList from '../components/PostList'
 import * as PostActions from '../actions/PostActions'
 
 const mapStateToProps = (state) => {
-  return state.posts
+  return {
+    posts: state.posts.posts,
+    user_id: state.auth.id,
+    isAuthenticated: state.auth.isAuthenticated
+  }
 }
 
 function mapDispatchToProps(dispatch) {

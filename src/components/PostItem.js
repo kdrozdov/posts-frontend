@@ -25,9 +25,12 @@ export default class PostItem extends Component {
               </span>
               <div>{this.props.attributes.body}</div>
             </div>
-            <div className="col-md-2">
-              <button className="btn btn-danger" onClick={this.handleRemoveClick} >Удалить</button>
-            </div>
+            { this.props.isAuthenticated
+              ? <div className="col-md-2">
+                  <button className="btn btn-danger" onClick={this.handleRemoveClick} >Удалить</button>
+                </div>
+              : ''
+            }
           </div>
         </div>
       </div>

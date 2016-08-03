@@ -1,3 +1,4 @@
+import { parseJSON } from '../utils';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const ADD_POST = 'ADD_POST'
@@ -13,7 +14,7 @@ export function receivePosts(posts) {
 export function fetchPosts() {
   return function (dispatch) {
     return fetch(`${process.env.BASE_URL}/posts`)
-      .then(response => response.json())
+      .then(parseJSON)
       .then(json =>
         dispatch(receivePosts(json.data))
       )
@@ -30,7 +31,7 @@ export function receivePost(post) {
 export function fetchPost(postId) {
   return function (dispatch) {
     return fetch(`${process.env.BASE_URL}/posts/${postId}`)
-    .then(response => response.json())
+    .then(parseJSON)
     .then(json =>
       dispatch(receivePost(json.data.attributes))
     )
@@ -45,16 +46,19 @@ export function addPost(post) {
 }
 
 export function createPost(params) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    let state = getState();
     return fetch(`${process.env.BASE_URL}/posts`, {
       method: 'POST',
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${state.auth.token}`
       },
       body: JSON.stringify({post: params})
     })
-    .then(response => response.json())
+    .then(parseJSON)
     .then(json =>
       dispatch(addPost(json.data))
     )
@@ -69,11 +73,14 @@ export function removePost(postId) {
 }
 
 export function destroyPost(postId) {
-  return function (dispatch) {
+  return function (dispatch, getState) {
+    let state = getState();
     return fetch(`${process.env.BASE_URL}/posts/${postId}`, {
+      credentials: 'include',
       headers: {
         'Accept': 'application/json',
-        'Content-Type': 'application/json'
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${state.auth.token}`
       },
       method: 'DELETE'
     })

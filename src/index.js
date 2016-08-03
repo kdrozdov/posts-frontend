@@ -7,6 +7,9 @@ import Layout from './components/Layout'
 import NotFound from './components/NotFound'
 import PostList from './containers/PostList'
 import Post from './containers/Post'
+import SignUp from './containers/SignUp'
+import Login from './containers/Login'
+import {requireAuthentication} from './components/AuthenticatedComponent'
 import configureStore from './store'
 
 const store = configureStore()
@@ -16,7 +19,9 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <Route path="/" component={Layout}>
         <IndexRoute component={PostList}/>
-        <Route path="posts/:id" component={Post}/>
+        <Route path="posts/:id" component={requireAuthentication(Post)}/>
+        <Route path="login" component={Login}/>
+        <Route path="signup" component={SignUp}/>
         <Route path="*" component={NotFound}/>
       </Route>
     </Router>

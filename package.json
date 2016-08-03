@@ -33,6 +33,8 @@
     "babel-polyfill": "^6.9.1",
     "babel-runtime": "^6.6.1",
     "bootstrap": "^3.3.6",
+    "classnames": "^2.2.5",
+    "jwt-decode": "^2.1.0",
     "react": "~15.1.0",
     "react-dom": "~15.1.0",
     "react-redux": "^4.4.5",
