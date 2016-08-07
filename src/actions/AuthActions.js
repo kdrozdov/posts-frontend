@@ -17,7 +17,7 @@ export function loginSuccess(token, payload) {
 
 export function login(params, redirect = '/') {
   return function (dispatch) {
-    return fetch(`${process.env.BASE_URL}/auth_tokens/`, {
+    return fetch(`${process.env.BASE_URL}/v1/auth_tokens/`, {
       method: 'post',
       credentials: 'include',
       headers: {

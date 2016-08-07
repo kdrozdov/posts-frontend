@@ -1,4 +1,4 @@
-import { parseJSON } from '../utils';
+import { parseJSON, checkHttpStatus, handleNotFound } from '../utils';
 export const RECEIVE_POSTS = 'RECEIVE_POSTS'
 export const RECEIVE_POST = 'RECEIVE_POST'
 export const ADD_POST = 'ADD_POST'
@@ -13,7 +13,7 @@ export function receivePosts(posts) {
 
 export function fetchPosts() {
   return function (dispatch) {
-    return fetch(`${process.env.BASE_URL}/posts`)
+    return fetch(`${process.env.BASE_URL}/v1/posts`)
       .then(parseJSON)
       .then(json =>
         dispatch(receivePosts(json.data))
@@ -30,11 +30,13 @@ export function receivePost(post) {
 
 export function fetchPost(postId) {
   return function (dispatch) {
-    return fetch(`${process.env.BASE_URL}/posts/${postId}`)
+    return fetch(`${process.env.BASE_URL}/v1/posts/${postId}`)
+    .then(checkHttpStatus)
     .then(parseJSON)
-    .then(json =>
-      dispatch(receivePost(json.data.attributes))
-    )
+    .then(json => {
+      dispatch(receivePost(json.data.attributes));
+    })
+    .catch(handleNotFound)
   }
 }
 
@@ -48,7 +50,7 @@ export function addPost(post) {
 export function createPost(params) {
   return function (dispatch, getState) {
     let state = getState();
-    return fetch(`${process.env.BASE_URL}/posts`, {
+    return fetch(`${process.env.BASE_URL}/v1/posts`, {
       method: 'POST',
       credentials: 'include',
       headers: {
@@ -75,7 +77,7 @@ export function removePost(postId) {
 export function destroyPost(postId) {
   return function (dispatch, getState) {
     let state = getState();
-    return fetch(`${process.env.BASE_URL}/posts/${postId}`, {
+    return fetch(`${process.env.BASE_URL}/v1/posts/${postId}`, {
       credentials: 'include',
       headers: {
         'Accept': 'application/json',

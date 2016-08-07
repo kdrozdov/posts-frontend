@@ -1,7 +1,7 @@
 import Bootstrap from 'bootstrap/dist/css/bootstrap.css'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, Redirect, IndexRoute, browserHistory } from 'react-router'
 import { Provider } from 'react-redux'
 import Layout from './components/Layout'
 import NotFound from './components/NotFound'
@@ -22,7 +22,8 @@ ReactDOM.render(
         <Route path="posts/:id" component={requireAuthentication(Post)}/>
         <Route path="login" component={Login}/>
         <Route path="signup" component={SignUp}/>
-        <Route path="*" component={NotFound}/>
+        <Route path="/404" component={NotFound} />
+        <Redirect from="*" to="/404" />
       </Route>
     </Router>
   </Provider>,
