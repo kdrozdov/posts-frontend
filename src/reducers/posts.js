@@ -25,7 +25,7 @@ const posts = (state = initialState, action) => {
       return Object.assign({}, state, { post: action.post });
     }
     case 'ADD_POST': {
-      const newPosts = [...state.posts, action.post];
+      const newPosts = [action.post, ...state.posts];
       return Object.assign({}, state, { posts: newPosts });
     }
     case 'REMOVE_POST': {
