@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
+import Dropzone from 'react-dropzone';
 
 export default class PostForm extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      image: null
+    }
+    this.fileReader = new FileReader();
+    this.onDrop = this.onDrop.bind(this);
     this.formData = this.formData.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -10,25 +16,39 @@ export default class PostForm extends Component {
   resetForm() {
     this.refs.title.value = ''
     this.refs.body.value = ''
+    this.setState({ image: null })
   }
 
   formData(){
-    return {
-      title: this.refs.title.value,
-      body: this.refs.body.value,
-      user_id: this.props.user_id
+    let fd = new FormData();
+    fd.append('post[title]', this.refs.title.value)
+    fd.append('post[body]', this.refs.body.value)
+    fd.append('post[user_id]', this.props.user_id)
+    fd.append('post[image]', this.state.image)
+    return fd
+  }
+
+  isValid() {
+    let title = this.refs.title.value;
+    let body = this.refs.body.value;
+    if (!title.trim() || !body.trim()) {
+      return false;
     }
+    return true;
   }
 
   handleSubmit(e) {
     e.preventDefault();
-    let params = this.formData();
-    if (!params.title.trim() ||
-        !params.body.trim()) {
+    if(!this.isValid()) {
       return;
     }
+    let params = this.formData();
     this.props.createPost(params)
       .then(() => this.resetForm());
+  }
+
+  onDrop(files) {
+    this.setState({ image: files[0] });
   }
 
   render() {
@@ -50,6 +70,18 @@ export default class PostForm extends Component {
               <label className="col-sm-2 control-label">Содержание</label>
               <div className="col-sm-10">
                 <textarea ref="body" className="form-control" rows="3" placeholder="Содержание новости"></textarea>
+              </div>
+            </div>
+
+            <div className="form-group">
+              <label className="col-sm-2 control-label">Изображение</label>
+              <div className="col-sm-10">
+                <Dropzone onDrop={this.onDrop} multiple={false} accept="image/*">
+                  { this.state.image
+                    ? <img src={this.state.image.preview} height="200" width="200" />
+                    : <div>Try dropping some files here, or click to select files to upload.</div>
+                  }
+                </Dropzone>
               </div>
             </div>
 
