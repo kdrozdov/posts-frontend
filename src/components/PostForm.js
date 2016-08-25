@@ -14,9 +14,8 @@ export default class PostForm extends Component {
   }
 
   resetForm() {
-    this.refs.title.value = ''
-    this.refs.body.value = ''
-    this.setState({ image: null })
+    this.refs.form.reset();
+    this.setState({ image: null });
   }
 
   formData(){
@@ -57,7 +56,7 @@ export default class PostForm extends Component {
       <div className="panel panel-default">
         <div className="panel-heading">Добавить новость</div>
         <div className="panel-body">
-          <form onSubmit={this.handleSubmit} className="form-horizontal" role="form">
+          <form ref="form" onSubmit={this.handleSubmit} className="form-horizontal" role="form">
 
             <div className="form-group">
               <label className="col-sm-2 control-label">Заголовок</label>
