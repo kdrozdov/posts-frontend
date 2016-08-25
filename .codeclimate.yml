@@ -9,5 +9,5 @@ engines:
       - javascript
 
 ratings:
-   paths:
-   - "src/**.js"
+  paths:
+  - "src/**.js"

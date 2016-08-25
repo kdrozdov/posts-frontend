@@ -36,7 +36,7 @@ module.exports = {
     preLoaders: [
       {
         test: /\.jsx?$/,
-        loader: "eslint-loader",
+        loader: 'eslint-loader',
         include: path.join(__dirname, 'src'),
         exclude: /node_modules/
       }
@@ -44,18 +44,18 @@ module.exports = {
     loaders: [
       {
         test: /\.jsx?$/,
-        loader: "react-hot",
+        loader: 'react-hot',
         include: path.resolve(__dirname, 'src')
       },
       {
         test: /\.jsx?$/,
-        loader: "babel-loader",
+        loader: 'babel-loader',
         include: [
-          path.resolve(__dirname, 'src'),
+          path.resolve(__dirname, 'src')
         ],
         query: {
           plugins: ['transform-runtime'],
-          presets: ['es2015', 'stage-0', 'react'],
+          presets: ['es2015', 'stage-0', 'react']
         }
       },
       { test: /\.css$/, loader: 'style-loader!css-loader' },

@@ -22,7 +22,6 @@ export default class PostList extends Component {
   }
 
   handleSearchClick(value) {
-    console.log('value', value);
     let params = Object.assign({}, this.props.query, { page: 1, q: value });
     this.props.fetchPosts(params);
   }
