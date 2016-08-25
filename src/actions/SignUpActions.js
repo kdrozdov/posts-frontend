@@ -20,7 +20,7 @@ export function signUpFailure(errors) {
 
 export function signUp(params, redirect = '/') {
   return function (dispatch) {
-    return fetch(`${process.env.BASE_URL}/registrations/`, {
+    return fetch(`${process.env.BASE_URL}/v1/registrations/`, {
       method: 'post',
       credentials: 'include',
       headers: {

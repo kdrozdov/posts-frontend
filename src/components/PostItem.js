@@ -21,9 +21,16 @@ export default class PostItem extends Component {
                 <h4>{this.props.attributes.title}</h4>
               </Link>
               <span>
-                <small>Автор: {this.props.attributes.username}</small>
+                <small>Автор: {this.props.attributes.username}</small>&nbsp;
+                <small>Дата: {this.props.attributes['created-at']}</small>
               </span>
-              <div>{this.props.attributes.body}</div>
+              <div>
+                { this.props.attributes.image.small
+                    ? <img src={this.props.attributes.image.small} height="100" width="100" style={{marginRight: '10px'}} className="img-thumbnail" />
+                    : ''
+                }
+                {this.props.attributes.body}
+              </div>
             </div>
             { this.props.isAuthenticated
               ? <div className="col-md-2">

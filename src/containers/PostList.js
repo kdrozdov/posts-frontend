@@ -1,13 +1,17 @@
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
 import PostList from '../components/PostList'
 import * as PostActions from '../actions/PostActions'
 
-const mapStateToProps = (state) => {
+const mapStateToProps = (state, ownProps) => {
   return {
     posts: state.posts.posts,
     user_id: state.auth.id,
-    isAuthenticated: state.auth.isAuthenticated
+    totalPages: state.posts.totalPages,
+    isFetching: state.posts.isFetching,
+    isAuthenticated: state.auth.isAuthenticated,
+    query: ownProps.location.query
   }
 }
 
@@ -15,4 +19,7 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators(PostActions, dispatch)
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(PostList)
+export default withRouter(connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PostList))
