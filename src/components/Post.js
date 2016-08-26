@@ -20,12 +20,12 @@ export default class Post extends Component {
               <div className="col-md-10">
                 <h4>{this.props.title}</h4>
                 <span>
-                  <small>Автор: {this.props.attributes.username}</small>&nbsp;
-                  <small>Дата: {this.props.attributes['created-at']}</small>
+                  <small>Автор: {this.props.username}</small>&nbsp;
+                  <small>Дата: {this.props['created-at']}</small>
                 </span>
                 <div>
-                  { this.props.attributes.image.normal
-                    ? <img src={this.props.attributes.image.normal} className="img-thumbnail" />
+                  { this.props.image.normal
+                    ? <img src={this.props.image.normal} className="img-thumbnail" />
                     : ''
                   }
 
