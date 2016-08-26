@@ -5,7 +5,8 @@ const initialState = {
   post: {
     title: '',
     body: '',
-    username: ''
+    username: '',
+    image: {}
   }
 };
 
